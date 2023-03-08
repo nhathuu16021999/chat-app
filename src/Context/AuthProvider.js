@@ -13,7 +13,6 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscibed = auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log({ user });
         const { displayName, email, uid, photoURL } = user;
         setUser({ displayName, email, uid, photoURL });
         setIsLoading(false);
