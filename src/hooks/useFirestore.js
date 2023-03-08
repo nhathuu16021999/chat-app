@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import { db } from '../firebase/config';
 
-/**
- *
- *
- * @param {*} collection
- * @param {*} condition
- */
 const useFirestore = (collection, condition) => {
   const [documents, setDocuments] = useState([]);
 
@@ -14,6 +8,7 @@ const useFirestore = (collection, condition) => {
     let collectionRef = db.collection(collection).orderBy('createAt');
     if (condition) {
       if (!condition.compareValue || !condition.compareValue.length) {
+        setDocuments([]);
         return;
       }
 
@@ -31,7 +26,7 @@ const useFirestore = (collection, condition) => {
       setDocuments(documents);
     });
     return unsubscribe;
-  }, [collection, condition, setDocuments]);
+  }, [collection, condition]);
   return documents;
 };
 
